@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sanad Studio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Sanad is a brand studio in Egypt for jewelry and maker labels: brand identity, product photography and websites.">
+<meta name="theme-color" content="#0b0c08">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Space+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400&family=Reem+Kufi:wght@600&display=swap" rel="stylesheet">
+<style>
+/* Same cinematic engine as Mano's portfolio. The hero is a 3D build of the Sanad pillar mark, scrubbed by scroll and cursor. */
+:root{
+  --bg:#0b0c08;--surface:#11130d;--brass:#b98b4e;--bright:#d6a968;--forest:#333a29;
+  --text:#ede8dc;--mut:#a39d8a;--line:rgba(237,232,220,.12);
+  --brass-a:185,139,78;--bright-a:214,169,104;
+  --display:'Oswald','Arial Narrow',sans-serif;--body:'Space Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--ar:'Reem Kufi','Noto Kufi Arabic',sans-serif;
+  color-scheme:dark
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:400 1rem/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+:focus-visible{outline:2px solid var(--bright);outline-offset:3px}
+
+/* stage + film layers */
+#stage{position:fixed;inset:0;z-index:-5;background:radial-gradient(ellipse at 68% 40%,#1a1d13 0%,#0b0c08 60%,#050604 100%)}
+#cv{width:100%;height:100%;display:block}
+.fx{position:fixed;inset:0;pointer-events:none;z-index:-4}
+.cine-vignette{background:radial-gradient(ellipse at center,transparent 38%,rgba(0,0,0,.9) 100%)}
+#cine-glow{mix-blend-mode:screen;background:radial-gradient(circle at 50% 50%,rgba(var(--brass-a),.14),transparent 45%)}
+.cine-grain{opacity:.08;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:jit .5s steps(4) infinite}
+@keyframes jit{0%{background-position:0 0}25%{background-position:-40px 20px}50%{background-position:30px -30px}75%{background-position:-20px -40px}100%{background-position:0 0}}
+.cine-scan{background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
+#bar{position:fixed;top:0;left:0;width:100%;height:2px;background:var(--bright);box-shadow:0 0 12px var(--bright);transform:scaleX(0);transform-origin:0 50%;z-index:60}
+
+/* nav */
+.nav{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:1.6rem;padding:.55rem 1.2rem;border:1px solid var(--line);border-radius:99px;background:rgba(14,15,10,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);white-space:nowrap}
+.logo{display:flex;align-items:center;gap:.5rem;font:700 1.15rem var(--display);letter-spacing:.04em;text-transform:uppercase}
+.logo img{height:30px;width:auto;display:block}
+.nav nav{display:flex;gap:1.2rem;font-size:.9rem;color:var(--mut)}
+.nav nav a{transition:color .2s}
+.nav nav a:hover{color:var(--text)}
+
+/* layout */
+.sec{max-width:1120px;margin:0 auto;padding-block:7rem;padding-left:max(1.4rem,env(safe-area-inset-left,0px));padding-right:max(1.4rem,env(safe-area-inset-right,0px))}
+h2{font:700 clamp(2.2rem,6vw,4rem)/1 var(--display);text-transform:uppercase;letter-spacing:.01em;margin-bottom:1rem;text-wrap:balance}
+.sub{color:var(--mut);max-width:52ch;margin-bottom:2.6rem}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;padding-block:0 9vh;padding-left:max(1.4rem,env(safe-area-inset-left,0px));padding-right:max(1.4rem,env(safe-area-inset-right,0px))}
+.wm{position:absolute;left:-1rem;top:6vh;font:600 clamp(8rem,26vw,22rem)/1 var(--ar);color:transparent;-webkit-text-stroke:2px rgba(var(--brass-a),.28);text-shadow:0 0 50px rgba(var(--brass-a),.12);pointer-events:none;user-select:none}
+.hero-in{position:relative;max-width:1120px;width:100%;margin:0 auto}
+.eyebrow{display:inline-block;font:400 .78rem var(--mono);letter-spacing:.12em;padding:.4rem .8rem;border:1px solid rgba(var(--bright-a),.55);border-radius:99px;background:rgba(var(--brass-a),.12);margin-bottom:1.4rem;text-transform:uppercase}
+h1{font:700 clamp(3rem,9.5vw,7.4rem)/.92 var(--display);text-transform:uppercase;max-width:11ch;text-shadow:0 4px 30px rgba(0,0,0,.7)}
+h1 span{display:block}
+h1 .g{background:linear-gradient(135deg,#fff7e6 0%,var(--bright) 50%,#8a6332 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+h1 b{color:var(--bright);-webkit-text-fill-color:var(--bright)}
+.lead{max-width:46ch;margin:1.4rem 0 1.8rem;color:#d9d3c3;text-shadow:0 2px 14px rgba(0,0,0,.8)}
+.cta{display:flex;flex-wrap:wrap;gap:.8rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border:1px solid var(--line);border-radius:99px;background:rgba(16,17,12,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:500 .95rem var(--body);color:var(--text);cursor:pointer;transition:transform .2s,border-color .2s,background .2s}
+.btn:hover{transform:translateY(-2px);border-color:var(--bright)}
+.btn.gold{background:var(--brass);border-color:var(--brass);color:#14150f}
+.btn.gold:hover{background:var(--bright)}
+.tele{display:flex;flex-wrap:wrap;gap:2.2rem;margin-top:2.2rem;font:400 .8rem var(--mono);color:var(--mut)}
+.tele b{display:block;font:700 2rem/1 var(--display);color:var(--text)}
+.beacon{display:inline-block;width:9px;height:9px;border-radius:50%;background:#2bd96b;box-shadow:0 0 0 0 rgba(43,217,107,.6);animation:ping 1.8s infinite;margin-right:.5rem}
+@keyframes ping{to{box-shadow:0 0 0 12px rgba(43,217,107,0)}}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem}
+.card{--x:50%;--y:50%;position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;background:rgba(14,15,10,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow:hidden;transition:transform .15s ease-out,border-color .25s;will-change:transform;min-width:0}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--x) var(--y),rgba(var(--bright-a),.16),transparent 70%);opacity:0;transition:opacity .25s;pointer-events:none}
+.card:hover{border-color:rgba(var(--bright-a),.6)}
+.card:hover::before{opacity:1}
+.art{aspect-ratio:4/3;max-width:100%;background:#000;border-bottom:1px solid var(--line);overflow:hidden}
+.art img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.card:hover .art img{transform:scale(1.04)}
+.body{padding:1.4rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.body h3{font:700 1.7rem/1.1 var(--display);text-transform:uppercase}
+.kind{font:400 .78rem var(--mono);color:var(--bright);text-transform:uppercase;letter-spacing:.06em}
+.body p{color:var(--mut);font-size:.96rem}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;margin-top:.2rem}
+.tags li{font:400 .72rem var(--mono);padding:.25rem .6rem;border:1px solid var(--line);border-radius:99px;color:var(--mut)}
+.more{margin-top:auto;padding-top:.8rem;font:500 1rem var(--body);color:var(--text);background:none;border:0;text-align:left;cursor:pointer}
+.more:hover{color:var(--bright)}
+
+/* packages */
+.pk .body{gap:.7rem}
+.pk .who{font:400 .78rem var(--mono);color:var(--bright);text-transform:uppercase;letter-spacing:.06em}
+.price{font:700 2.1rem/1 var(--display);font-variant-numeric:tabular-nums;color:var(--text);padding:1.4rem 1.4rem 0}
+.price small{display:block;margin-top:.45rem;font:400 .75rem var(--mono);color:var(--mut);letter-spacing:.06em;text-transform:uppercase}
+.pk ul.inc{list-style:none;display:grid;gap:.45rem;margin-top:.3rem}
+.pk ul.inc li{color:#d9d3c3;font-size:.94rem;padding-left:1.2rem;position:relative}
+.pk ul.inc li::before{content:"";position:absolute;left:0;top:.62em;width:.55rem;height:2px;background:var(--bright)}
+.pk.top{border-color:rgba(var(--bright-a),.45)}
+.note{margin-top:1.4rem;color:var(--mut);font-size:.9rem}
+
+/* about terminal */
+.term{border:1px solid var(--line);border-radius:14px;background:rgba(10,11,8,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow:hidden;max-width:760px}
+.tbar{display:flex;align-items:center;gap:.45rem;padding:.7rem 1rem;border-bottom:1px solid var(--line);font:400 .78rem var(--mono);color:var(--mut)}
+.tbar i{width:10px;height:10px;border-radius:50%;background:#333}
+.tbar i:first-child{background:var(--bright)}
+.tbar span{margin-left:.6rem}
+.term .in{padding:1.6rem;display:grid;gap:1rem}
+.term p{color:#d9d3c3;max-width:62ch}
+.term p::before{content:"> ";color:var(--bright);font-family:var(--mono)}
+.term .ar{font:600 2.4rem/1 var(--ar);color:var(--bright)}
+.term .ar::before{content:none}
+.term h4{font:700 1.05rem var(--display);text-transform:uppercase;letter-spacing:.04em;color:var(--text);margin-top:.4rem}
+.term .pr{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.term .pr div{min-width:0}
+.term .pr p{font-size:.92rem;color:var(--mut)}
+.term .pr p::before{content:none}
+
+/* contact */
+#contact .sub{margin-bottom:1.8rem}
+.num{margin-top:1.2rem;font:400 .85rem var(--mono);color:var(--mut);user-select:all}
+footer{margin-top:5rem;color:var(--mut);font-size:.85rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+
+/* case dialog */
+dialog{margin:auto;width:min(920px,calc(100% - 32px));max-height:calc(100% - 48px);background:var(--surface);color:var(--text);border:1px solid rgba(var(--bright-a),.35);border-radius:18px;padding:0;overflow:auto}
+dialog::backdrop{background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.dlg{padding:1.6rem;display:grid;gap:1.2rem}
+.dlg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.dlg-head h3{font:700 clamp(2rem,6vw,3rem)/1 var(--display);text-transform:uppercase}
+.x{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--text);font:400 1.2rem var(--body);cursor:pointer}
+.x:hover{border-color:var(--bright)}
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.8rem}
+.gal img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;border:1px solid var(--line);display:block}
+.dlg p{color:#d9d3c3;max-width:62ch}
+.sw{display:flex;flex-wrap:wrap;gap:.8rem}
+.sw div{display:grid;gap:.3rem;font:400 .72rem var(--mono);color:var(--mut)}
+.sw i{width:52px;height:52px;border-radius:10px;border:1px solid var(--line)}
+
+/* reveal + cursor */
+.rv{transform:translateY(22px);opacity:.001;transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+.js-off .rv{opacity:1;transform:none}
+#ring{position:fixed;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1.5px solid rgba(var(--bright-a),.85);border-radius:50%;pointer-events:none;z-index:70;display:none;transition:width .2s,height .2s,margin .2s,background .2s}
+#ring.big{width:60px;height:60px;margin:-30px 0 0 -30px;background:rgba(var(--bright-a),.12)}
+@media (pointer:fine){html.cur,html.cur a,html.cur button{cursor:none}html.cur #ring{display:block}}
+@media (pointer:coarse){
+.nav,.card,.term,.btn{backdrop-filter:none;-webkit-backdrop-filter:none}
+.nav{background:rgba(14,15,10,.9)}.card{background:rgba(14,15,10,.94)}.term{background:rgba(10,11,8,.94)}.btn{background:rgba(16,17,12,.88)}
+.btn.gold{background:var(--brass)}
+.cine-grain,.cine-scan,#cine-glow{display:none}
+.wm,h1,.lead{text-shadow:none}
+html{scroll-behavior:auto}
+.rv{opacity:1;transform:none;transition:none}
+.card{will-change:auto}
+h1 .g{background:none;-webkit-text-fill-color:var(--bright);color:var(--bright)}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cine-grain,.beacon{animation:none}.rv{opacity:1;transform:none;transition:none}}
+.tabs,.hint{display:none}
+@media (max-width:760px){
+body{padding-bottom:92px}
+.nav{left:max(1.2rem,env(safe-area-inset-left,0px));transform:none;padding:0;border:0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.nav nav{display:none}
+.logo{font-size:1.5rem;text-shadow:0 2px 12px #000}
+.logo img{height:38px;filter:drop-shadow(0 2px 10px #000)}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;position:fixed;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:50;padding:5px;border:1px solid var(--line);border-radius:18px;background:rgba(14,15,10,.95)}
+.tabs a{text-align:center;padding:.75rem 0;border-radius:13px;font-size:.82rem;color:var(--mut)}
+.tabs a.on{color:var(--text);background:rgba(255,255,255,.08)}
+.tabs a.wa{background:var(--brass);color:#14150f;font-weight:500}
+.hero{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
+.wm{display:none}
+.eyebrow{font-size:.68rem;margin-bottom:1rem}
+h1{font-size:clamp(2.9rem,14vw,4.4rem);max-width:none}
+.lead{font-size:.95rem;margin:1rem 0 1.3rem}
+.hero .cta{flex-direction:column}
+.hero .cta .btn{width:100%;justify-content:center}
+.hero .cta .btn:not(.gold){display:none}
+.tele{margin-top:1.4rem;gap:1.6rem}
+.sec{padding-block:4.5rem 1.5rem}
+h2{font-size:clamp(2rem,10vw,2.8rem)}
+.sub{margin-bottom:1.2rem}
+.hint{display:block;margin:0 0 .9rem;color:var(--mut);font:400 .78rem var(--mono)}
+.grid.swipe{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1 * max(1.2rem,env(safe-area-inset-left,0px)));padding:0 max(1.2rem,env(safe-area-inset-left,0px)) 1rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.grid.swipe::-webkit-scrollbar{display:none}
+.grid.swipe .card{flex:0 0 84%;scroll-snap-align:center}
+.grid.stack{grid-template-columns:1fr}
+.term{max-width:none}
+#contact .cta{flex-direction:column}
+#contact .btn{width:100%;justify-content:center}
+footer{margin-top:3rem}
+.dlg{padding:1.2rem}
+.gal{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="stage"><canvas id="cv" aria-hidden="true"></canvas></div>
+<div class="fx cine-vignette"></div><div class="fx" id="cine-glow"></div><div class="fx cine-grain"></div><div class="fx cine-scan"></div>
+<div id="ring"></div>
+
+<header class="nav">
+  <a class="logo" href="#top"><img src="sanad-strategies.png" alt="Sanad Strategies" width="700" height="195"></a>
+  <nav aria-label="Main"><a href="#work">Work</a><a href="#packages">Packages</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+</header>
+<nav class="tabs" aria-label="Quick navigation"><a href="#work">Work</a><a href="#packages">Packages</a><a href="#about">About</a><a class="wa" href="https://wa.me/201555689445" target="_blank" rel="noopener">WhatsApp</a></nav>
+
+<main>
+<section id="top" class="hero">
+  <div class="wm" aria-hidden="true">سند</div>
+  <div class="hero-in">
+    <p class="eyebrow">Brand studio · Egypt</p>
+    <h1><span>Brands built</span><span class="g">to stand<b>.</b></span></h1>
+    <p class="lead">Brand identity, product photography and websites for jewelry and maker labels that want a foundation, not a favor. Scroll or move your cursor to turn the logo.</p>
+    <div class="cta">
+      <a class="btn gold" href="#work">See the work →</a>
+      <a class="btn" href="https://wa.me/201555689445" target="_blank" rel="noopener">Message on WhatsApp</a>
+    </div>
+    <div class="tele">
+      <div><b>3</b>brands built</div>
+      <div><b>3</b>ways to start</div>
+      <div style="align-self:end"><i class="beacon"></i>Taking new clients</div>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="sec">
+  <h2 class="rv">Selected work</h2>
+  <p class="sub rv">Three identities, three very different customers: a snack brand, a streetwear label and a jewelry line.</p>
+  <p class="hint">Swipe to see all three →</p>
+  <div class="grid swipe">
+    <article class="card rv">
+      <div class="art"><img src="toastella-black.jpg" alt="Toastella logo: a smiling toast sandwich mascot" loading="lazy"></div>
+      <div class="body">
+        <h3>Toastella</h3><p class="kind">Food &amp; snack brand</p>
+        <p>A full identity for a snack brand: logo, mascot, color system and guidelines, playful without looking childish.</p>
+        <ul class="tags"><li>Brand identity</li><li>Mascot design</li><li>Guidelines</li></ul>
+        <button class="more" type="button" data-case="toastella">View the case →</button>
+      </div>
+    </article>
+    <article class="card rv">
+      <div class="art"><img src="nostalgia-wordmark.jpg" alt="Nostalgia script wordmark with headphones and a cassette" loading="lazy"></div>
+      <div class="body">
+        <h3>Nostalgia</h3><p class="kind">Apparel brand</p>
+        <p>A retro wordmark built around a cassette-and-headphones mark, made to carry across merch from a bold chest print to a quiet corner mark.</p>
+        <ul class="tags"><li>Logo design</li><li>Merch application</li></ul>
+        <button class="more" type="button" data-case="nostalgia">View the case →</button>
+      </div>
+    </article>
+    <article class="card rv">
+      <div class="art"><img src="pulse-ring-2.jpg" alt="Pulse ring, product photograph" loading="lazy"></div>
+      <div class="body">
+        <h3>Pulse</h3><p class="kind">Jewelry brand</p>
+        <p>A gothic, cosmic identity for a nighttime buyer: deep space color, moody product photography and a cash-on-delivery website.</p>
+        <ul class="tags"><li>Brand identity</li><li>Product photography</li><li>Website</li></ul>
+        <button class="more" type="button" data-case="pulse">View the case →</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="packages" class="sec">
+  <h2 class="rv">Packages</h2>
+  <p class="sub rv">Pick a starting point, not a straitjacket. Every brand is at a different stage, and every package can be adjusted to fit what you need.</p>
+  <div class="grid stack-m">
+    <article class="card pk rv">
+      <div class="price">1,500–2,500 EGP<small>One deliverable</small></div>
+      <div class="body">
+        <h3>First Time Offer</h3><p class="who">For a first real look</p>
+        <p>A low-risk way to see what a real brand identity looks like. One focused deliverable, done properly.</p>
+        <ul class="inc"><li>Logo and a small color system, or a styled product photo set</li><li>One round of revisions</li></ul>
+      </div>
+    </article>
+    <article class="card pk top rv">
+      <div class="price">4,000–6,000 EGP<small>Two deliverables</small></div>
+      <div class="body">
+        <h3>Glow Up</h3><p class="who">For a brand ready to level up</p>
+        <p>Two pieces working together instead of one, usually the combination that moves the needle for a small brand.</p>
+        <ul class="inc"><li>Brand identity + product photography, or identity + website</li><li>Two rounds of revisions</li></ul>
+      </div>
+    </article>
+    <article class="card pk rv">
+      <div class="price">6,000–10,000 EGP<small>The full set</small></div>
+      <div class="body">
+        <h3>From A to Success</h3><p class="who">For starting from scratch, properly</p>
+        <p>Identity, photography and a website, built together as one system from day one instead of stitched together later.</p>
+        <ul class="inc"><li>Brand identity + product photography + website</li><li>Full revision support until it's right</li></ul>
+      </div>
+    </article>
+  </div>
+  <p class="note rv">Not sure which one fits? Send a message and describe your brand. We'll pick together.</p>
+</section>
+
+<section id="about" class="sec">
+  <h2 class="rv">Why Sanad</h2>
+  <div class="term rv">
+    <div class="tbar"><i></i><i></i><i></i><span>sanad ~ about</span></div>
+    <div class="in">
+      <p class="ar" lang="ar">سند</p>
+      <p>Sanad means support: the pillar a structure leans on before anything else gets built.</p>
+      <p>A brand identity should be the same thing, the part everything else stands on.</p>
+      <p>Founded by Mano Daoud, who builds and runs his own brands too, so every project is designed by someone who knows what launching one takes.</p>
+      <div class="pr">
+        <div><h4>Fit, not a formula</h4><p>Every brand starts from what it needs, not a fixed package stretched to fit.</p></div>
+        <div><h4>Fast, without shortcuts</h4><p>Work ships quickly, without cutting corners on craft.</p></div>
+        <div><h4>Built to last</h4><p>An identity should still hold up years after the trend that inspired it fades.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="sec">
+  <h2 class="rv">Let's build something</h2>
+  <p class="sub rv">Tell us about your brand on WhatsApp: what you sell, who buys it, and where you want it to go.</p>
+  <div class="cta rv">
+    <a class="btn gold" href="https://wa.me/201555689445" target="_blank" rel="noopener">Message on WhatsApp →</a>
+    <button class="btn" id="copy" type="button">Copy number</button>
+  </div>
+  <p class="num rv">+20 155 568 9445 · messages only, no calls</p>
+  <footer><img src="sanad-strategies.png" alt="Sanad Strategies" width="700" height="195" style="height:34px;width:auto;opacity:.8"><span>© 2026 Sanad Studio · Based in Egypt</span></footer>
+</section>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlg-t">
+  <div class="dlg">
+    <div class="dlg-head"><div><p class="kind" id="dlg-k"></p><h3 id="dlg-t"></h3></div><button class="x" type="button" id="dlg-x" aria-label="Close">✕</button></div>
+    <div class="gal" id="dlg-g"></div>
+    <p id="dlg-p"></p>
+    <div class="sw" id="dlg-s"></div>
+    <ul class="tags" id="dlg-tags"></ul>
+    <div id="dlg-l"></div>
+  </div>
+</dialog>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id),cv=$('cv'),ctx=cv.getContext('2d'),glow=$('cine-glow'),bar=$('bar'),ring=$('ring');
+const touch=matchMedia('(pointer:coarse)').matches,still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let W=0,H=0,dpr=1,sp=0,cur=0,mx=.5,my=.5,rx=0,ry=0,cx=0,cy=0,born=performance.now();
+
+/* the Sanad wordmark, extruded into sliced layers */
+const LAYERS=touch?8:14,logo=new Image();let gold=null,dim=null;
+const tint=(c)=>{const o=document.createElement('canvas');o.width=logo.naturalWidth;o.height=logo.naturalHeight;const x=o.getContext('2d');x.drawImage(logo,0,0);x.globalCompositeOperation='source-in';x.fillStyle=c;x.fillRect(0,0,o.width,o.height);return o};
+logo.onload=()=>{gold=tint('#ecc98f');dim=tint('#b98b4e');born=performance.now()};logo.src='sanad-logo.png';
+/* brass dust */
+const DUST=[];for(let i=0;i<(touch?70:150);i++)DUST.push([Math.random()*140-40,Math.random()*90-20,Math.random()*120-60,Math.random()*6.28]);
+
+function size(){dpr=Math.min(devicePixelRatio||1,touch?1.5:2);W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+size();addEventListener('resize',size);
+
+function render(p,t){
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+  const narrow=W<760,lw=narrow?Math.min(W*.8,H*.75):Math.min(W*.38,640),lh=lw*.35,s=lw/60;
+  const ox=narrow?W*.5:W*.75,oy=narrow?H*.2:H*.44;
+  const a=-.45+p*1.15+(touch?0:(mx-.5)*.6)+(still?0:Math.sin(t*.0005)*.04);
+  const b=-.18+p*.2+(touch?0:(my-.5)*.3);
+  const ca=Math.cos(a),sa=Math.sin(a),cb=Math.cos(b),sb=Math.sin(b),F=520;
+  const P=(x,y,z)=>{x-=30;y-=30;const x1=x*ca+z*sa,z1=-x*sa+z*ca,y1=y*cb-z1*sb,z2=y*sb+z1*cb,f=F/(F+z2*s*.9);return[ox+x1*s*f,oy+y1*s*f,z2]};
+
+  /* floor grid */
+  ctx.lineWidth=1;const fy=30+lh/s*.5+4;
+  for(let i=-6;i<=6;i++){
+    ctx.strokeStyle='rgba(185,139,78,'+(.11-Math.abs(i)*.013)+')';
+    let A=P(30+i*10,fy,-60),B=P(30+i*10,fy,60);ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke();
+    A=P(-30,fy,i*10);B=P(90,fy,i*10);ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke();
+  }
+  /* dust */
+  for(const d of DUST){const q=P(d[0],d[1]-(still?0:(t*.002+d[3]*10)%90),d[2]);const tw=.35+.35*Math.sin(t*.002+d[3]);ctx.fillStyle='rgba(214,169,104,'+tw*.5+')';ctx.fillRect(q[0],q[1],1.4,1.4)}
+  if(!gold)return;
+
+  /* layers back to front; on load they stack in one by one */
+  const intro=still?1:Math.min(1,(t-born)/1500),D=5.5;
+  const kx=ca,sh=-sa*.14;
+  for(let l=0;l<LAYERS;l++){
+    const vis=Math.min(1,Math.max(0,intro*LAYERS*1.3-l));if(vis<=0)continue;
+    const z=-D+l*(2*D/(LAYERS-1)),last=l===LAYERS-1;
+    const c=P(30,30,z),zc=c[2],f=F/(F+zc*s*.9);
+    ctx.setTransform(dpr*kx*f,dpr*sh*f,0,dpr*cb*f,dpr*c[0],dpr*c[1]);
+    ctx.globalAlpha=(last?1:.07+l/LAYERS*.28)*vis;
+    if(last&&!touch){ctx.shadowColor='rgba(214,169,104,.7)';ctx.shadowBlur=22}
+    ctx.drawImage(last?gold:dim,-lw/2,-lh/2,lw,lh);
+    ctx.shadowBlur=0;
+  }
+  ctx.globalAlpha=1;
+}
+
+let Hd=0,lastY=-1;const measure=()=>{Hd=document.documentElement.scrollHeight-innerHeight};
+function onScroll(){sp=Hd>0?Math.min(1,Math.max(0,scrollY/Hd)):0;bar.style.transform='scaleX('+sp+')'}
+addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',()=>{measure();onScroll()});addEventListener('load',()=>{measure();onScroll()});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{measure();onScroll()});measure();onScroll();
+
+addEventListener('pointermove',e=>{
+  if(e.pointerType==='touch')return;
+  mx=e.clientX/innerWidth;my=e.clientY/innerHeight;rx=e.clientX;ry=e.clientY;
+  glow.style.background='radial-gradient(circle at '+mx*100+'% '+my*100+'%,rgba(185,139,78,.14),transparent 45%)';
+  if(!document.documentElement.classList.contains('cur'))document.documentElement.classList.add('cur'),cx=rx,cy=ry;
+});
+document.addEventListener('pointerover',e=>ring.classList.toggle('big',!!e.target.closest('a,button,.card')));
+
+(function loop(t){
+  t=t||performance.now();
+  const y=scrollY;if(y!==lastY){lastY=y;onScroll()}
+  cur+=(sp-cur)*(touch?.22:.1);
+  render(cur,t);
+  if(!touch){cx+=(rx-cx)*.2;cy+=(ry-cy)*.2;ring.style.transform='translate3d('+cx+'px,'+cy+'px,0)'}
+  requestAnimationFrame(loop);
+})();
+
+/* card tilt + spotlight */
+document.querySelectorAll('.card').forEach(c=>{
+  c.addEventListener('pointermove',e=>{
+    if(e.pointerType==='touch'||still)return;
+    const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+    c.style.setProperty('--x',x*100+'%');c.style.setProperty('--y',y*100+'%');
+    c.style.transform='perspective(900px) rotateX('+(.5-y)*6+'deg) rotateY('+(x-.5)*6+'deg)';
+  });
+  c.addEventListener('pointerleave',()=>{c.style.transform=''});
+});
+
+/* active tab */
+const tabs=[...document.querySelectorAll('.tabs a:not(.wa)')];
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)tabs.forEach(t=>t.classList.toggle('on',t.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+['work','packages','about','contact'].forEach(id=>so.observe($(id)));
+
+/* reveal on scroll */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>{const r=el.getBoundingClientRect();if(r.top<innerHeight)el.classList.add('in')}),1200);
+
+/* case studies */
+const CASES={
+  toastella:{k:'Food & snack brand',t:'Toastella',img:['toastella-black.jpg','toastella-white.jpg'],p:'A full identity for a snack brand: logo, mascot, color system and brand guidelines, built to feel playful without looking childish.',sw:['#F2F2F2','#FDD058','#D7041B','#FED589','#000000','#88A342'],tags:['Brand identity','Mascot design','Brand guidelines']},
+  nostalgia:{k:'Apparel brand',t:'Nostalgia',img:['nostalgia-wordmark.jpg','nostalgia-icon.jpg','hoodie-black.jpg','hoodie-white.jpg'],p:'A retro wordmark logo built around a cassette-and-headphones mark, designed to carry across merch, from a bold chest print to a quiet corner mark.',sw:[],tags:['Logo design','Merch application']},
+  pulse:{k:'Jewelry brand',t:'Pulse',img:['pulse-ring-1.jpg','pulse-ring-2.jpg','pulse-ring-3.jpg'],p:'A gothic, cosmic identity built for a nighttime buyer: deep space color, moody product photography, and a website built around a simple cash-on-delivery order flow.',sw:[],tags:['Brand identity','Product photography','Website'],link:'https://acknowledgepulse.github.io/pulse/'}
+};
+const dlg=$('dlg');
+document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>{
+  const c=CASES[b.dataset.case];
+  $('dlg-k').textContent=c.k;$('dlg-t').textContent=c.t;$('dlg-p').textContent=c.p;
+  $('dlg-g').innerHTML=c.img.map(s=>'<img src="'+s+'" alt="'+c.t+' work sample">').join('');
+  $('dlg-s').innerHTML=c.sw.map(h=>'<div><i style="background:'+h+'"></i>'+h+'</div>').join('');
+  $('dlg-s').hidden=!c.sw.length;
+  $('dlg-tags').innerHTML=c.tags.map(x=>'<li>'+x+'</li>').join('');
+  $('dlg-l').innerHTML=c.link?'<a class="btn gold" href="'+c.link+'" target="_blank" rel="noopener">Visit the live site →</a>':'';
+  dlg.showModal();
+}));
+$('dlg-x').addEventListener('click',()=>dlg.close());
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+
+/* copy number */
+const cp=$('copy');
+cp.addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText('+201555689445');cp.textContent='Copied'}
+  catch(e){cp.textContent='+20 155 568 9445'}
+  setTimeout(()=>cp.textContent='Copy number',2200);
+});
+})();
+</script>
+</body>
+</html>
