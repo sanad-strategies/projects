@@ -231,8 +231,8 @@ footer{margin-top:3rem}
 
 <section id="work" class="sec">
   <h2 class="rv">Selected work</h2>
-  <p class="sub rv">Three identities, three very different customers: a snack brand, a streetwear label and a jewelry line.</p>
-  <p class="hint">Swipe to see all three →</p>
+  <p class="sub rv">Three identities for three very different customers (a snack brand, a streetwear label and a jewelry line), plus a concept website for a bakery.</p>
+  <p class="hint">Swipe to see all four →</p>
   <div class="grid swipe">
     <article class="card rv">
       <div class="art"><img src="toastella-black.jpg" alt="Toastella logo: a smiling toast sandwich mascot" loading="lazy"></div>
@@ -259,6 +259,15 @@ footer{margin-top:3rem}
         <p>A gothic, cosmic identity for a nighttime buyer: deep space color, moody product photography and a cash-on-delivery website.</p>
         <ul class="tags"><li>Brand identity</li><li>Product photography</li><li>Website</li></ul>
         <button class="more" type="button" data-case="pulse">View the case →</button>
+      </div>
+    </article>
+    <article class="card rv">
+      <div class="art"><img src="sweet-batter-hero.jpg" alt="Sweet Batter website hero: an animated baker in a warm kitchen" loading="lazy"></div>
+      <div class="body">
+        <h3>Sweet Batter</h3><p class="kind">Bakery · Concept website</p>
+        <p>A one-page showcase for a cupcake and cakesicle brand, opening on a Pixar-style baker film that plays as you scroll.</p>
+        <ul class="tags"><li>Website</li><li>Scroll-driven hero</li><li>Menu page</li></ul>
+        <button class="more" type="button" data-case="sweetbatter">View the case →</button>
       </div>
     </article>
   </div>
@@ -437,7 +446,8 @@ setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>{const r=el.getBound
 const CASES={
   toastella:{k:'Food & snack brand',t:'Toastella',img:['toastella-black.jpg','toastella-white.jpg'],p:'A full identity for a snack brand: logo, mascot, color system and brand guidelines, built to feel playful without looking childish.',sw:['#F2F2F2','#FDD058','#D7041B','#FED589','#000000','#88A342'],tags:['Brand identity','Mascot design','Brand guidelines']},
   nostalgia:{k:'Apparel brand',t:'Nostalgia',img:['nostalgia-wordmark.jpg','nostalgia-icon.jpg','hoodie-black.jpg','hoodie-white.jpg'],p:'A retro wordmark logo built around a cassette-and-headphones mark, designed to carry across merch, from a bold chest print to a quiet corner mark.',sw:[],tags:['Logo design','Merch application']},
-  pulse:{k:'Jewelry brand',t:'Pulse',img:['pulse-ring-1.jpg','pulse-ring-2.jpg','pulse-ring-3.jpg'],p:'A gothic, cosmic identity built for a nighttime buyer: deep space color, moody product photography, and a website built around a simple cash-on-delivery order flow.',sw:[],tags:['Brand identity','Product photography','Website'],link:'https://acknowledgepulse.github.io/pulse/'}
+  pulse:{k:'Jewelry brand',t:'Pulse',img:['pulse-ring-1.jpg','pulse-ring-2.jpg','pulse-ring-3.jpg'],p:'A gothic, cosmic identity built for a nighttime buyer: deep space color, moody product photography, and a website built around a simple cash-on-delivery order flow.',sw:[],tags:['Brand identity','Product photography','Website'],link:'https://acknowledgepulse.github.io/pulse/'},
+  sweetbatter:{k:'Bakery · Concept website',t:'Sweet Batter',img:['sweet-batter-hero.jpg','sweet-batter-cupcake.jpg','sweet-batter-cakesicle.jpg'],p:'A concept website built on our own for a New Cairo cupcake and cakesicle brand. The home page opens on a Pixar-style film of a baker making the signature carrot cupcake from scratch, scrubbed by scrolling instead of looping. A "Ready for a sugar rush?" button leads to a separate menu page with every flavor and price, and the dusty rose and white palette is pulled straight from the brand logo.',sw:['#D6A69A','#9A6155','#F3E3DE','#FBF3F1','#4A2E29'],tags:['Website','Scroll-driven hero','Menu page','Palette from logo'],link:'https://manodaoud.github.io/sweet-batter/'}
 };
 document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>{
   const c=CASES[b.dataset.case];
