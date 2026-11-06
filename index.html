@@ -81,6 +81,7 @@ h1 b{color:var(--bright);-webkit-text-fill-color:var(--bright)}
 .art{aspect-ratio:4/3;max-width:100%;background:#000;border-bottom:1px solid var(--line);overflow:hidden}
 .art img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
 .card:hover .art img{transform:scale(1.04)}
+.art.lg img{object-fit:contain;padding:1.6rem}
 .body{padding:1.4rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
 .body h3{font:700 1.7rem/1.1 var(--display);text-transform:uppercase}
 .kind{font:400 .78rem var(--mono);color:var(--bright);text-transform:uppercase;letter-spacing:.06em}
@@ -133,6 +134,7 @@ dialog::backdrop{background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-ba
 .x:hover{border-color:var(--bright)}
 .gal{display:flex;gap:.8rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;padding-bottom:.3rem}
 .gal img{flex:1 1 0;min-width:0;width:100%;max-width:100%;aspect-ratio:1;max-height:46vh;object-fit:cover;border-radius:12px;border:1px solid var(--line);display:block;scroll-snap-align:start;background:#000}
+.gal img.lg{object-fit:contain;padding:1.4rem}
 .gal-hint{display:none;font:400 .75rem var(--mono);color:var(--mut)}
 html.lock{overflow:hidden}
 html.lock #ring{display:none!important}
@@ -253,7 +255,7 @@ footer{margin-top:3rem}
       </div>
     </article>
     <article class="card rv">
-      <div class="art"><img src="pulse-ring-2.jpg" alt="Pulse ring, product photograph" loading="lazy"></div>
+      <div class="art lg"><img src="pulse-logo.png" alt="Pulse logo: Acknowledge your style" loading="lazy"></div>
       <div class="body">
         <h3>Pulse</h3><p class="kind">Jewelry brand</p>
         <p>A gothic, cosmic identity for a nighttime buyer: deep space color, moody product photography and a cash-on-delivery website.</p>
@@ -262,7 +264,7 @@ footer{margin-top:3rem}
       </div>
     </article>
     <article class="card rv">
-      <div class="art"><img src="sweet-batter-hero.jpg" alt="Sweet Batter website hero: an animated baker in a warm kitchen" loading="lazy"></div>
+      <div class="art lg"><img src="sweet-batter-logo.png" alt="Sweet Batter logo" loading="lazy"></div>
       <div class="body">
         <h3>Sweet Batter</h3><p class="kind">Bakery · Concept website</p>
         <p>A one-page showcase for a cupcake and cakesicle brand, opening on a Pixar-style baker film that plays as you scroll.</p>
@@ -446,13 +448,13 @@ setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>{const r=el.getBound
 const CASES={
   toastella:{k:'Food & snack brand',t:'Toastella',img:['toastella-black.jpg','toastella-white.jpg'],p:'A full identity for a snack brand: logo, mascot, color system and brand guidelines, built to feel playful without looking childish.',sw:['#F2F2F2','#FDD058','#D7041B','#FED589','#000000','#88A342'],tags:['Brand identity','Mascot design','Brand guidelines']},
   nostalgia:{k:'Apparel brand',t:'Nostalgia',img:['nostalgia-wordmark.jpg','nostalgia-icon.jpg','hoodie-black.jpg','hoodie-white.jpg'],p:'A retro wordmark logo built around a cassette-and-headphones mark, designed to carry across merch, from a bold chest print to a quiet corner mark.',sw:[],tags:['Logo design','Merch application']},
-  pulse:{k:'Jewelry brand',t:'Pulse',img:['pulse-ring-1.jpg','pulse-ring-2.jpg','pulse-ring-3.jpg'],p:'A gothic, cosmic identity built for a nighttime buyer: deep space color, moody product photography, and a website built around a simple cash-on-delivery order flow.',sw:[],tags:['Brand identity','Product photography','Website'],link:'https://acknowledgepulse.github.io/pulse/'},
-  sweetbatter:{k:'Bakery · Concept website',t:'Sweet Batter',img:['sweet-batter-hero.jpg','sweet-batter-cupcake.jpg','sweet-batter-cakesicle.jpg'],p:'A concept website built on our own for a New Cairo cupcake and cakesicle brand. The home page opens on a Pixar-style film of a baker making the signature carrot cupcake from scratch, scrubbed by scrolling instead of looping. A "Ready for a sugar rush?" button leads to a separate menu page with every flavor and price, and the dusty rose and white palette is pulled straight from the brand logo.',sw:['#D6A69A','#9A6155','#F3E3DE','#FBF3F1','#4A2E29'],tags:['Website','Scroll-driven hero','Menu page','Palette from logo'],link:'https://manodaoud.github.io/sweet-batter/'}
+  pulse:{k:'Jewelry brand',t:'Pulse',img:['pulse-logo.png','pulse-ring-1.jpg','pulse-ring-2.jpg','pulse-ring-3.jpg'],p:'A gothic, cosmic identity built for a nighttime buyer: deep space color, moody product photography, and a website built around a simple cash-on-delivery order flow.',sw:[],tags:['Brand identity','Product photography','Website'],link:'https://acknowledgepulse.github.io/pulse/'},
+  sweetbatter:{k:'Bakery · Concept website',t:'Sweet Batter',img:['sweet-batter-logo.png','sweet-batter-hero.jpg','sweet-batter-cupcake.jpg','sweet-batter-cakesicle.jpg'],p:'A concept website built on our own for a New Cairo cupcake and cakesicle brand. The home page opens on a Pixar-style film of a baker making the signature carrot cupcake from scratch, scrubbed by scrolling instead of looping. A "Ready for a sugar rush?" button leads to a separate menu page with every flavor and price, and the dusty rose and white palette is pulled straight from the brand logo.',sw:['#D6A69A','#9A6155','#F3E3DE','#FBF3F1','#4A2E29'],tags:['Website','Scroll-driven hero','Menu page','Palette from logo'],link:'https://manodaoud.github.io/sweet-batter/'}
 };
 document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>{
   const c=CASES[b.dataset.case];
   $('dlg-k').textContent=c.k;$('dlg-t').textContent=c.t;$('dlg-p').textContent=c.p;
-  $('dlg-g').innerHTML=c.img.map(s=>'<img src="'+s+'" alt="'+c.t+' work sample">').join('');
+  $('dlg-g').innerHTML=c.img.map(s=>'<img'+(s.indexOf('logo')>-1?' class="lg"':'')+' src="'+s+'" alt="'+c.t+(s.indexOf('logo')>-1?' logo':' work sample')+'">').join('');
   $('dlg-s').innerHTML=c.sw.map(h=>'<div><i style="background:'+h+'"></i>'+h+'</div>').join('');
   $('dlg-s').hidden=!c.sw.length;
   $('dlg-tags').innerHTML=c.tags.map(x=>'<li>'+x+'</li>').join('');
