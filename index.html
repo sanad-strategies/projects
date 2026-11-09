@@ -322,6 +322,9 @@ h1 b{color:var(--brass);-webkit-text-fill-color:var(--brass)}
 .beacon{background:var(--brass);box-shadow:0 0 0 0 rgba(var(--brass-a),.6);animation-name:ping2}
 @keyframes ping2{0%{box-shadow:0 0 0 0 rgba(var(--brass-a),.55)}70%{box-shadow:0 0 0 10px rgba(var(--brass-a),0)}100%{box-shadow:0 0 0 0 rgba(var(--brass-a),0)}}
 
+.nav-cta{background:var(--brass);color:#062C30;font:600 .85rem var(--body);padding:.45rem 1rem;border-radius:99px;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 8px 22px rgba(var(--brass-a),.3);transition:background .2s,transform .2s}
+.nav-cta:hover{background:var(--bright);transform:translateY(-1px)}
+@media (max-width:760px){.nav-cta{display:none}}
 /* phone */
 @media (max-width:760px){
   .nav{background:linear-gradient(180deg,rgba(var(--bg-a),.6),rgba(var(--bg-a),.3));border:0;border-bottom:1px solid var(--line);box-shadow:0 10px 30px rgba(0,10,12,.3);padding-bottom:12px;pointer-events:none}
@@ -341,8 +344,9 @@ h1 b{color:var(--brass);-webkit-text-fill-color:var(--brass)}
 <header class="nav">
   <a class="logo" href="#top"><img src="sanad-strategies.png" alt="Sanad Strategies" width="700" height="195"></a>
   <nav aria-label="Main"><a href="#work">Work</a><a href="#packages">Packages</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  <a class="nav-cta" href="https://wa.me/12024748975?text=Hi%20Sanad%2C%20I%27d%20like%20to%20talk%20about%20my%20brand." target="_blank" rel="noopener">Contact Us</a>
 </header>
-<nav class="tabs" aria-label="Quick navigation"><a href="#work">Work</a><a href="#packages">Packages</a><a href="#about">About</a><a class="wa" href="https://wa.me/12024748975?text=Hi%20Sanad%2C%20I%27d%20like%20to%20talk%20about%20my%20brand." target="_blank" rel="noopener">WhatsApp</a></nav>
+<nav class="tabs" aria-label="Quick navigation"><a href="#work">Work</a><a href="#packages">Packages</a><a href="#about">About</a><a class="wa" href="https://wa.me/12024748975?text=Hi%20Sanad%2C%20I%27d%20like%20to%20talk%20about%20my%20brand." target="_blank" rel="noopener">Contact Us</a></nav>
 
 <main>
 <section id="top" class="hero">
@@ -358,7 +362,7 @@ h1 b{color:var(--brass);-webkit-text-fill-color:var(--brass)}
     <p class="lead">Brand identity, product photography and websites for jewelry and maker labels that want a foundation, not a favor.</p>
     <div class="cta">
       <a class="btn gold" href="#work">See the work →</a>
-      <a class="btn" href="https://wa.me/12024748975?text=Hi%20Sanad%2C%20I%27d%20like%20to%20talk%20about%20my%20brand." target="_blank" rel="noopener">Message on WhatsApp</a>
+      <a class="btn" href="https://wa.me/12024748975?text=Hi%20Sanad%2C%20I%27d%20like%20to%20talk%20about%20my%20brand." target="_blank" rel="noopener">Contact Us</a>
     </div>
     <div class="tele">
       <div><b>3</b>brands built</div>
@@ -467,7 +471,7 @@ h1 b{color:var(--brass);-webkit-text-fill-color:var(--brass)}
   <h2 class="rv">Let's build something</h2>
   <p class="sub rv">Tell us about your brand on WhatsApp: what you sell, who buys it, and where you want it to go.</p>
   <div class="cta rv">
-    <a class="btn gold" href="https://wa.me/12024748975?text=Hi%20Sanad%2C%20I%27d%20like%20to%20talk%20about%20my%20brand." target="_blank" rel="noopener">Message on WhatsApp →</a>
+    <a class="btn gold" href="https://wa.me/12024748975?text=Hi%20Sanad%2C%20I%27d%20like%20to%20talk%20about%20my%20brand." target="_blank" rel="noopener">Contact Us →</a>
     <button class="btn" id="copy" type="button">Copy number</button>
   </div>
   <p class="num rv">+1 202 474 8975 · WhatsApp messages only, no calls</p>
