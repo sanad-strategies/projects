@@ -210,9 +210,6 @@ html.lock #ring{display:none!important}
 #ring.big{width:60px;height:60px;margin:-30px 0 0 -30px;background:rgba(var(--bright-a),.12)}
 @media (pointer:fine){html.cur,html.cur a,html.cur button{cursor:none}html.cur #ring{display:block}}
 @media (pointer:coarse){
-.nav,.card,.term,.btn{backdrop-filter:none;-webkit-backdrop-filter:none}
-.nav{background:rgba(14,15,10,.9)}.card{background:rgba(14,15,10,.94)}.term{background:rgba(10,11,8,.94)}.btn{background:rgba(16,17,12,.88)}
-.btn.gold{background:var(--brass)}
 .cine-grain,.cine-scan,#cine-glow{display:none}
 .wm,h1,.lead{text-shadow:none}
 html{scroll-behavior:auto}
@@ -260,6 +257,71 @@ footer{margin-top:3rem}
 .dlg{padding:1.2rem}
 .gal img{flex:0 0 80%;max-height:none}
 .gal-hint{display:block}
+}
+
+/* ===== v2: 60 / 30 / 10 palette + Apple-style glass ===== */
+:root{
+  /* 60%: dominant */
+  --bg:#0b0c08;
+  /* 30%: secondary (forest + sage surfaces, cream text) */
+  --forest:#2e3526;--forest-a:46,53,38;--sage:#b9c2a5;--sage-a:185,194,165;--text:#efeadf;--mut:#a7a493;
+  /* 10%: accent (gold, used sparingly) */
+  --brass:#c3924f;--bright:#dcae6c;
+  --glass:linear-gradient(180deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,.035) 100%),rgba(var(--forest-a),.28);
+  --glass-strong:linear-gradient(180deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,.04) 100%),rgba(var(--forest-a),.42);
+  --glass-edge:rgba(255,255,255,.16);
+  --glass-shadow:inset 0 1px 0 rgba(255,255,255,.24),inset 0 -1px 0 rgba(255,255,255,.05),inset 0 0 0 1px rgba(255,255,255,.02),0 18px 50px rgba(0,0,0,.45);
+  --blur:blur(26px) saturate(175%);
+  --line:rgba(255,255,255,.1);
+}
+/* ambient colour behind the glass, so the frost has something to bend */
+#stage{background:
+  radial-gradient(40vmax 40vmax at 12% 18%,rgba(var(--forest-a),.95),transparent 70%),
+  radial-gradient(34vmax 34vmax at 88% 72%,rgba(var(--forest-a),.75),transparent 70%),
+  radial-gradient(26vmax 26vmax at 70% 12%,rgba(var(--sage-a),.10),transparent 70%),
+  radial-gradient(22vmax 22vmax at 22% 88%,rgba(var(--brass-a),.10),transparent 70%),
+  #0b0c08}
+#cine-glow{background:radial-gradient(circle at 50% 50%,rgba(var(--sage-a),.08),transparent 45%)}
+
+/* glass surfaces */
+.nav,.card,.term,.hc,dialog,.tabs,.btn:not(.gold),.eyebrow,.hc-btn,.x{
+  background:var(--glass);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur)}
+.hc,dialog{background:var(--glass-strong)}
+.card,.term,.hc{border-radius:22px}
+.hc-bar,.tbar{border-bottom-color:rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+.art{border-bottom-color:rgba(255,255,255,.08)}
+.btn:not(.gold):hover{border-color:rgba(255,255,255,.32)}
+.card:hover{border-color:rgba(255,255,255,.3)}
+.card::before{background:radial-gradient(260px circle at var(--x) var(--y),rgba(255,255,255,.10),transparent 70%)}
+.tags li{background:rgba(var(--forest-a),.45);border-color:rgba(255,255,255,.08)}
+
+/* secondary (30%) takes over the labels that used to be gold */
+.eyebrow{color:var(--sage)}
+.kind,.pk .who{color:var(--sage)}
+.pk ul.inc li::before{background:var(--sage)}
+.term p::before{color:var(--sage)}
+.term .ar{color:var(--sage)}
+.tbar i:first-child,.hc-bar i:first-child{background:var(--sage)}
+.hc-bar span{background:rgba(var(--forest-a),.6);color:var(--text)}
+.hc-code .f{color:var(--sage)}
+.hc-code .ar{color:var(--sage)}
+.hc-code .cur .n{color:var(--bright)}
+.wm{-webkit-text-stroke:2px rgba(var(--sage-a),.16);text-shadow:none}
+.more:hover,.x:hover{color:var(--text)}
+.pk.top{border-color:rgba(var(--bright-a),.55)}
+
+/* accent (10%): gold only where it should pull the eye */
+.btn.gold,.tabs a.wa{background:var(--brass);border-color:var(--brass);color:#15130c;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 10px 28px rgba(var(--brass-a),.28)}
+.btn.gold:hover{background:var(--bright)}
+@media (pointer:coarse){h1 .g{-webkit-text-fill-color:var(--bright);color:var(--bright)}}
+
+/* phone: glass logo bar and tab bar */
+@media (max-width:760px){
+  .nav{background:linear-gradient(180deg,rgba(11,12,8,.55),rgba(11,12,8,.25));border:0;border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 10px 30px rgba(0,0,0,.25);padding-bottom:12px;pointer-events:none}
+  .tabs{border-radius:22px}
+  .tabs a.on{background:rgba(255,255,255,.1)}
+  .card,.term{backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%)}
 }
 </style>
 </head>
@@ -552,9 +614,9 @@ cp.addEventListener('click',async()=>{
   const box=document.getElementById('hc'),view=document.getElementById('hc-view'),cam=document.getElementById('hc-cam'),code=document.getElementById('hc-code'),btn=document.getElementById('hc-btn');
   if(!box)return;
   const L=['// sanad.strategies','const brand = new Brand("yours");','','brand.needs(foundation, !favor);','','if (brand.wants(to.stand)) {','  sanad.build(identity);','  sanad.shoot(products);','  sanad.launch(website);','}','','// سند = support','return brand.built(to.stand);'];
-  const CPS=24,PAUSE=[.45,.4,0,.45,0,.3,.2,.2,.35,.25,0,.4,.2],LH=36,PADT=24,GUT=54;
+  const CPS=38,PAUSE=[.25,.22,0,.25,0,.16,.1,.1,.2,.14,0,.22,.1],LH=36,PADT=24,GUT=54;
   const sch=[];let t0=.5;L.forEach((l,i)=>{sch.push({s:t0,d:l.length/CPS});t0+=l.length/CPS+PAUSE[i]});
-  const TE=t0,ZO=1.3,END=TE+ZO;
+  const TE=t0,ZO=1.0,END=TE+ZO,PULL=[3,9];
   let CW=13.2,vw=500,vh=400,t=0,last=0,key='',raf=0;
   const esc=x=>x.replace(/&/g,'&amp;').replace(/</g,'&lt;');
   function hl(x){
@@ -570,15 +632,16 @@ cp.addEventListener('click',async()=>{
     const {li,col}=at(tt),k=li+':'+col;
     if(k!==key){key=k;let h='';for(let i=0;i<=li;i++){const tx=i<li?L[i]:L[i].slice(0,col);h+='<span class="l'+(i===li?' cur':'')+'"><span class="n">'+(i+1)+'</span>'+hl(tx)+(i===li?'<span class="hc-caret"></span>':'')+'</span>'}code.innerHTML=h}
     // camera target = cursor, smoothed over the last ~0.45s
-    let sx=0,sy=0;const N=10;for(let j=0;j<N;j++){const q=at(Math.max(0,tt-j*.045));sx+=GUT+q.col*CW;sy+=PADT+q.li*LH+LH/2}sx/=N;sy/=N;
+    let sx=0,sy=0;const N=6;for(let j=0;j<N;j++){const q=at(Math.max(0,tt-j*.03));sx+=GUT+q.col*CW;sy+=PADT+q.li*LH+LH/2}sx/=N;sy/=N;
     const fullW=GUT+33*CW+24,fullH=PADT*2+L.length*LH,zOut=Math.min(vw/fullW,vh/fullH);
-    let punch=0;sch.forEach((q,i)=>{const d=tt-(q.s+q.d);if(L[i].length&&d>0&&d<.35)punch=Math.max(punch,Math.sin(d/.35*Math.PI)*.12)});
+    let punch=0;sch.forEach((q,i)=>{const d=tt-(q.s+q.d);if(L[i].length&&d>0&&d<.3)punch=Math.max(punch,Math.sin(d/.3*Math.PI)*.26)});
     const zBase=Math.max(zOut*1.6,Math.min(vw/(GUT+21*CW),zOut*2.2));
-    const zIn=zBase*(1+punch+.05*Math.sin(tt*.9));
-    const zo=ease((tt-TE)/ZO),z=zIn+(zOut-zIn)*zo,rot=(1-zo)*(-1.1+1.1*Math.sin(tt*.6));
-    let tx=Math.min(8,vw*.8-sx*zIn),ty=vh*.5-sy*zIn;
+    let pull=0;PULL.forEach(i=>{const d=tt-(sch[i].s+sch[i].d);if(d>0&&d<.75)pull=Math.max(pull,Math.sin(d/.75*Math.PI))});
+    const zIn=zBase*(1+punch+.09*Math.sin(tt*1.7))*(1-.42*pull);
+    const zo=ease((tt-TE)/ZO),z=zIn+(zOut-zIn)*zo,rot=(1-zo)*(2.6*Math.sin(tt*1.25)-.8),ry=(1-zo)*7*Math.sin(tt*.9),rx=(1-zo)*5*Math.cos(tt*1.1);
+    let tx=Math.min(8,vw*.8-sx*zIn)+(1-zo)*10*Math.sin(tt*2.1),ty=vh*.5-sy*zIn+(1-zo)*12*Math.cos(tt*1.7);
     const ox=(vw-fullW*zOut)/2,oy=(vh-fullH*zOut)/2;tx+=(ox-tx)*zo;ty+=(oy-ty)*zo;
-    cam.style.transform='translate('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px) scale('+z.toFixed(4)+') rotate('+rot.toFixed(3)+'deg)';
+    cam.style.transform='translate('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px) perspective(900px) rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg) scale('+z.toFixed(4)+') rotate('+rot.toFixed(3)+'deg)';
   }
   function loop(now){const dt=Math.min(.05,(now-(last||now))/1000);last=now;t+=dt;draw(Math.min(t,END));if(t<END){raf=requestAnimationFrame(loop)}else finish()}
   function finish(){cancelAnimationFrame(raf);t=END;draw(END);box.classList.add('done');btn.textContent='↻ replay'}
